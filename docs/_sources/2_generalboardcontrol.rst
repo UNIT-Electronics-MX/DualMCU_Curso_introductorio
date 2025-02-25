@@ -66,7 +66,7 @@ Al hacerlo, se abrirá la siguiente ventana:
 Actualización de firmware ESP32
 -------------------------------
 
-Inicia la UNIT DualMCU con el microcontrolador ESP32 en **Posición A**, presionando el botón de FLASH y conectando el dispositivo a la PC.
+Inicia la UNIT DualMCU con el microcontrolador ESP32 en **Posición B**, presionando el botón de FLASH y conectando el dispositivo a la PC.
 
 
 .. figure:: /_static/2-Micropython/images/flash.png
