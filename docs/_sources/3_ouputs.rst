@@ -48,7 +48,7 @@ Código
 
 Usa el siguiente código para comprobar la instalación del firmware de MicroPython en el ESP32. Asegúrate de que esté seleccionado el MCU ESP32.
 
-Download: `Download blink.py </docs/3-Led_intermitente/code/blink.py>`_
+Download: `Download blink.py <https://github.com/UNIT-Electronics-MX/DualMCU_Curso_introductorio/releases/download/v0.0.1/blink.py>`_
 
 .. code-block:: python
     :linenos:

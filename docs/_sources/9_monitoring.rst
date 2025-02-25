@@ -43,7 +43,7 @@ Código
 .. raw:: html
 
     <div style="text-align: right;">
-         <a href="/docs/9-Sistema_de_monitoreo/code/unitESP32_dth11.py" download="unitESP32_dth11.py">
+         <a href="https://github.com/UNIT-Electronics-MX/DualMCU_Curso_introductorio/releases/download/v0.0.1/unitESP32_dth11.py" download="unitESP32_dth11.py">
               <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
                     Download unitESP32_dth11.py
               </button>

@@ -77,7 +77,7 @@ Estos ejemplos muestran cómo usar el LM35 en microcontroladores RP2040 y ESP32.
 .. raw:: html
 
     <div style="text-align: right;">
-         <a href="/_static/4-Sensor_de_temperatura/code/unitESP32_adc.py" download="unitRP2040_adc.py">
+         <a href="https://github.com/UNIT-Electronics-MX/DualMCU_Curso_introductorio/releases/download/v0.0.1/unitRP2040_adc.py" download="unitRP2040_adc.py">
               <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
                     Download unitRP2040_adc.py
               </button>
@@ -115,7 +115,7 @@ Estos ejemplos muestran cómo usar el LM35 en microcontroladores RP2040 y ESP32.
 .. raw:: html
 
     <div style="text-align: right;">
-         <a href="/_static/4-Sensor_de_temperatura/code/unitESP32_adc.py" download="unitESP32_adc.py">
+         <a href="https://github.com/UNIT-Electronics-MX/DualMCU_Curso_introductorio/releases/download/v0.0.1/unitESP32_adc.py" download="unitESP32_adc.py">
               <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
                     Download unitESP32_adc.py
               </button>

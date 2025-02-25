@@ -87,7 +87,7 @@ Uso Básico
 Node.js es un framework que interpreta comandos que le envías. Para probar tu instalación, puedes crear un script de prueba siguiendo estos pasos:
 
 - Abre tu editor de preferencia.
-- Copia y pega este `código <https://github.com/UNIT-Electronics/DualMCU_ESP32_Panel_de_control_Web/blob/main/Docs/App/app.js>`_:
+- Copia y pega este `código <https://github.com/UNIT-Electronics-MX/DualMCU_Curso_introductorio/releases/download/v0.0.1/app.js>`_:
 
 .. raw:: html
 
@@ -195,7 +195,7 @@ Código
 .. raw:: html
 
     <div style="text-align: right;">
-         <a href="/docs/11-Comunicacion_inalambrica/code/unitESP32_wireless.py" download="unitESP32_wireless.py">
+         <a href="https://github.com/UNIT-Electronics-MX/DualMCU_Curso_introductorio/releases/download/v0.0.1/unitESP32_wireless.py" download="unitESP32_wireless.py">
               <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
                     Download unitESP32_wireless.py
               </button>

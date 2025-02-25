@@ -85,6 +85,16 @@ Diagrama para controlar un motor:
 
 .. `Download unitRP2040_motors1.py <../docs/7-Control_de_motores_DC/code/unitRP2040_motors1.py>`_
 
+.. raw:: html
+
+    <div style="text-align: right;">
+         <a href="https://github.com/UNIT-Electronics-MX/DualMCU_Curso_introductorio/releases/download/v0.0.1/unitRP2040_motors1.py" download="unitRP2040_motors1.py">
+              <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                    Download unitESP32_pir.py
+              </button>
+         </a>
+    </div>
+
 .. code-block:: python
     :linenos:
 
@@ -124,6 +134,15 @@ El siguiente paso es controlar la velocidad del motor: para ello se utiliza PWM.
 Download unitRP2040_motors2.py:
 -------------------------------
 
+.. raw:: html
+
+    <div style="text-align: right;">
+         <a href="https://github.com/UNIT-Electronics-MX/DualMCU_Curso_introductorio/releases/download/v0.0.1/unitRP2040_motors2.py" download="unitRP2040_motors2.py">
+              <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                    Download unitESP32_pir.py
+              </button>
+         </a>
+    </div>
 
 Diagrama para controlar dos motores:
 
@@ -132,7 +151,15 @@ Diagrama para controlar dos motores:
    :align: center
    :alt: sections of the code
 
-.. `Download unitRP2040_motors2.py <../docs/7-Control_de_motores_DC/code/unitRP2040_motors2.py>`_
+.. raw:: html
+
+    <div style="text-align: right;">
+         <a href="https://github.com/UNIT-Electronics-MX/DualMCU_Curso_introductorio/releases/download/v0.0.1/unitRP2040_motors3.py" download="unitRP2040_motors3.py">
+              <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                    Download unitESP32_pir.py
+              </button>
+         </a>
+    </div>
 
 .. code-block:: python
     :linenos:

@@ -61,7 +61,7 @@ A continuación se muestra el código para visualizar la leyenda **“UNIT ELECT
 .. raw:: html
 
   <div style="text-align: right;">
-      <a href="/docs/10-Control_de_pantalla_OLED/code/unitRP2040_oled.py" download="unitESP32_oled.py">
+      <a href="https://github.com/UNIT-Electronics-MX/DualMCU_Curso_introductorio/releases/download/v0.0.1/unitRP2040_oled.py" download="unitESP32_oled.py">
         <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
           Download unitESP32_oled.py
         </button>
@@ -114,7 +114,7 @@ A continuación se presenta otro código base que incluye:
 .. raw:: html
 
   <div style="text-align: right;">
-      <a href="/_static/10-Control_de_pantalla_OLED/code/unitRP2040_oled2.py" download="unitESP32_oled2.py">
+      <a href="https://github.com/UNIT-Electronics-MX/DualMCU_Curso_introductorio/releases/download/v0.0.1/unitRP2040_oled2.py" download="unitESP32_oled2.py">
         <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
           Download unitESP32_oled2.py
         </button>
@@ -214,7 +214,7 @@ Para facilitar la programación con la pantalla OLED, hemos identificado una lib
 .. raw:: html
 
   <div style="text-align: right;">
-      <a href="/docs/10-Control_de_pantalla_OLED/code/ssd1306.py" download="ssd1306.py">
+      <a href="https://github.com/UNIT-Electronics-MX/DualMCU_Curso_introductorio/releases/download/v0.0.1/ssd1306.py" download="ssd1306.py">
         <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
           Download ssd1306.py
         </button>
