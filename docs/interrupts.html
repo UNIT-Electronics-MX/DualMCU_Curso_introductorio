@@ -1,0 +1,672 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Interrupts &#8212; documentación de Cocket Nova Development Board Programming Guide C/C++ - 0.1.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=07f796b5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=47050f13"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'interrupts';</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/Logo-UNIT_Web-04-800x182.png" class="logo__image only-light" alt="documentación de Cocket Nova Development Board Programming Guide C/C++ - 0.1.0 - Home"/>
+    <script>document.write(`<img src="_static/Logo-UNIT_Web-04-800x182.png" class="logo__image only-dark" alt="documentación de Cocket Nova Development Board Programming Guide C/C++ - 0.1.0 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_about.html">Introducción a la DUALMCU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_generalboardcontrol.html">Micropython y la DualMCU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_ouputs.html">Led intermitente (OUTPUT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_adc.html">Sensor de temperatura</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_pwm.html">Control Servo (PWM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_alarm.html">Sistema de alarma (INPUT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_control_motor.html">Control de motores DC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_thread.html">Hilos (threads)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_monitoring.html">Sistema de monitoreo ambiental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_i2c.html">Control de pantalla OLED (I2C)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_comunication.html">Comunicación inalámbrica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_cores.html">Comunicación entre microcontrolador ESP32 y RP2040</a></li>
+<li class="toctree-l1"><a class="reference internal" href="report.html">Cómo Generar un Informe de Error</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/UNIT-Electronics/CH55x_SDCC_Doc" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/UNIT-Electronics/CH55x_SDCC_Doc/edit/main/docs/interrupts.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/UNIT-Electronics/CH55x_SDCC_Doc/issues/new?title=Issue%20on%20page%20%2Finterrupts.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/interrupts.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Interrupts</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timer-0-1-interrupts">Timer 0/1  Interrupts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#external-interrupts">External Interrupts</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="interrupts">
+<h1>Interrupts<a class="headerlink" href="#interrupts" title="Link to this heading">#</a></h1>
+<p>The CH552 microcontroller supports 14 sets of interrupt signal sources. These include 6 sets of interrupts
+(INT0, T0, INT1, T1, UART0, and T2), which are compatible with the standard MCS51, and 8 sets of extended
+interrupts (SPI0, TKEY, USB, ADC, UART1, PWMX, GPIO, and WDOG). The GPIO interrupt can be chosen from 7 I/O
+pins.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="id1">
+<caption><span class="caption-text">Default priority sequence of interrupt sources</span><a class="headerlink" href="#id1" title="Link to this table">#</a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 10.0%" />
+<col style="width: 30.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Interrupt src.</p></th>
+<th class="head"><p>Entry addr.</p></th>
+<th class="head"><p>Interrupt #</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default prio. seq.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>INT_NO_INT0</p></td>
+<td><p>0x0003</p></td>
+<td><p>0</p></td>
+<td><p>External interrupt 0</p></td>
+<td><p>High priority</p></td>
+</tr>
+<tr class="row-odd"><td><p>INT_NO_TMR0</p></td>
+<td><p>0x000B</p></td>
+<td><p>1</p></td>
+<td><p>Timer 0 interrupt</p></td>
+<td><p>↓</p></td>
+</tr>
+<tr class="row-even"><td><p>INT_NO_INT1</p></td>
+<td><p>0x0013</p></td>
+<td><p>2</p></td>
+<td><p>External interrupt 1</p></td>
+<td><p>↓</p></td>
+</tr>
+<tr class="row-odd"><td><p>INT_NO_TMR1</p></td>
+<td><p>0x001B</p></td>
+<td><p>3</p></td>
+<td><p>Timer 1 interrupt</p></td>
+<td><p>↓</p></td>
+</tr>
+<tr class="row-even"><td><p>INT_NO_UART0</p></td>
+<td><p>0x0023</p></td>
+<td><p>4</p></td>
+<td><p>UART0 interrupt</p></td>
+<td><p>↓</p></td>
+</tr>
+<tr class="row-odd"><td><p>INT_NO_TMR2</p></td>
+<td><p>0x002B</p></td>
+<td><p>5</p></td>
+<td><p>Timer 2 interrupt</p></td>
+<td><p>↓</p></td>
+</tr>
+<tr class="row-even"><td><p>INT_NO_SPI0</p></td>
+<td><p>0x0033</p></td>
+<td><p>6</p></td>
+<td><p>SPI0 interrupt</p></td>
+<td><p>↓</p></td>
+</tr>
+<tr class="row-odd"><td><p>INT_NO_TKEY</p></td>
+<td><p>0x003B</p></td>
+<td><p>7</p></td>
+<td><p>Touch key timer interrupt</p></td>
+<td><p>↓</p></td>
+</tr>
+<tr class="row-even"><td><p>INT_NO_USB</p></td>
+<td><p>0x0043</p></td>
+<td><p>8</p></td>
+<td><p>USB interrupt</p></td>
+<td><p>↓</p></td>
+</tr>
+<tr class="row-odd"><td><p>INT_NO_ADC</p></td>
+<td><p>0x004B</p></td>
+<td><p>9</p></td>
+<td><p>ADC interrupt</p></td>
+<td><p>↓</p></td>
+</tr>
+<tr class="row-even"><td><p>INT_NO_UART1</p></td>
+<td><p>0x0053</p></td>
+<td><p>10</p></td>
+<td><p>UART1 interrupt</p></td>
+<td><p>↓</p></td>
+</tr>
+<tr class="row-odd"><td><p>INT_NO_PWMX</p></td>
+<td><p>0x005B</p></td>
+<td><p>11</p></td>
+<td><p>PWM1/PWM2 interrupt</p></td>
+<td><p>↓</p></td>
+</tr>
+<tr class="row-even"><td><p>INT_NO_GPIO</p></td>
+<td><p>0x0063</p></td>
+<td><p>12</p></td>
+<td><p>GPIO Interrupt</p></td>
+<td><p>↓</p></td>
+</tr>
+<tr class="row-odd"><td><p>INT_NO_WDOG</p></td>
+<td><p>0x006B</p></td>
+<td><p>13</p></td>
+<td><p>Watchdog timer interrupt</p></td>
+<td><p>Low priority</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The interrupt priority is determined by the interrupt number.</p>
+<section id="timer-0-1-interrupts">
+<h2>Timer 0/1  Interrupts<a class="headerlink" href="#timer-0-1-interrupts" title="Link to this heading">#</a></h2>
+<p>Timer0 and Timer1 are 16-bit timers/counters controlled by TCON and TMOD. TCON is responsible for timer/counter
+T0 and T1 startup control, overflow interrupt, and external interrupt control. Each timer consists of dual
+8-bit registers forming a 16-bit timing unit. Timer 0’s high byte counter is TH0, and its low byte counter
+is TL0. Similarly, Timer 1’s high byte counter is TH1, and its low byte counter is TL1. Timer 1 can also
+serve as the baud rate generator for UART0.
+code example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">timer0_interrupt</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">__interrupt</span><span class="p">(</span><span class="n">INT_NO_TMR0</span><span class="p">)</span>        <span class="o">/*</span> <span class="n">Timer0</span> <span class="n">interrupt</span> <span class="n">service</span> <span class="n">routine</span> <span class="p">(</span><span class="n">ISR</span><span class="p">)</span> <span class="o">*/</span>
+<span class="p">{</span>
+    <span class="n">PIN_toggle</span><span class="p">(</span><span class="n">PIN_BUZZER</span><span class="p">);</span>
+    <span class="n">TH0</span> <span class="o">=</span> <span class="mh">0xFF</span><span class="p">;</span>             <span class="o">/*</span> <span class="mi">50</span><span class="n">ms</span> <span class="n">timer</span> <span class="n">value</span> <span class="o">*/</span>
+    <span class="n">TL0</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">CLK_config</span><span class="p">();</span>
+    <span class="n">DLY_ms</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+    <span class="n">PIN_output</span><span class="p">(</span><span class="n">PIN_BUZZER</span><span class="p">);</span>
+    <span class="n">EA</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                <span class="o">/*</span> <span class="n">Enable</span> <span class="k">global</span> <span class="n">interrupt</span> <span class="o">*/</span>
+    <span class="n">ET0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                <span class="o">/*</span> <span class="n">Enable</span> <span class="n">timer0</span> <span class="n">interrupt</span> <span class="o">*/</span>
+
+    <span class="n">TH0</span> <span class="o">=</span> <span class="mh">0xFF</span><span class="p">;</span>             <span class="o">/*</span> <span class="mi">50</span><span class="n">ms</span> <span class="n">timer</span> <span class="n">value</span> <span class="o">*/</span>
+    <span class="n">TL0</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span>
+    <span class="n">TMOD</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">;</span>            <span class="o">/*</span> <span class="n">Timer0</span> <span class="n">mode1</span> <span class="o">*/</span>
+    <span class="n">TR0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                <span class="o">/*</span> <span class="n">Start</span> <span class="n">timer0</span> <span class="o">*/</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="external-interrupts">
+<h2>External Interrupts<a class="headerlink" href="#external-interrupts" title="Link to this heading">#</a></h2>
+<p>INT0 and INT1 are external interrupt input pins. When an external interrupt occurs, the corresponding
+interrupt service routine is executed. The external interrupt can be triggered by the falling edge,
+rising edge, or both edges of the external interrupt input signal. The trigger mode is determined by the
+external interrupt input pin.</p>
+<p>code example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">void</span> <span class="n">ext0_interrupt</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">__interrupt</span><span class="p">(</span><span class="n">INT_NO_INT0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">PIN_toggle</span><span class="p">(</span><span class="n">PIN_LED</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">CLK_config</span><span class="p">();</span>
+    <span class="n">DLY_ms</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+    <span class="n">PIN_output_OD</span><span class="p">(</span><span class="n">PIN_INT</span><span class="p">);</span>
+    <span class="n">PIN_output</span><span class="p">(</span><span class="n">PIN_LED</span><span class="p">);</span>
+
+    <span class="n">EA</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>     <span class="o">/*</span> <span class="n">Enable</span> <span class="k">global</span> <span class="n">interrupt</span> <span class="o">*/</span>
+    <span class="n">EX0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="o">//</span> <span class="n">Enable</span> <span class="n">INT0</span>
+    <span class="n">IT0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="o">//</span> <span class="n">INT0</span> <span class="ow">is</span> <span class="n">edge</span> <span class="n">triggered</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="o">//</span> <span class="n">Do</span> <span class="n">nothing</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timer-0-1-interrupts">Timer 0/1  Interrupts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#external-interrupts">External Interrupts</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Cesar Bautista
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Unit Electronics.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

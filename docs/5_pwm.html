@@ -1,0 +1,670 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Control Servo (PWM) &#8212; documentación de Cocket Nova Development Board Programming Guide C/C++ - 0.1.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=07f796b5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=47050f13"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '5_pwm';</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Sistema de alarma (INPUT)" href="6_alarm.html" />
+    <link rel="prev" title="Sensor de temperatura" href="4_adc.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/Logo-UNIT_Web-04-800x182.png" class="logo__image only-light" alt="documentación de Cocket Nova Development Board Programming Guide C/C++ - 0.1.0 - Home"/>
+    <script>document.write(`<img src="_static/Logo-UNIT_Web-04-800x182.png" class="logo__image only-dark" alt="documentación de Cocket Nova Development Board Programming Guide C/C++ - 0.1.0 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_about.html">Introducción a la DUALMCU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_generalboardcontrol.html">Micropython y la DualMCU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_ouputs.html">Led intermitente (OUTPUT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_adc.html">Sensor de temperatura</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Control Servo (PWM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_alarm.html">Sistema de alarma (INPUT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_control_motor.html">Control de motores DC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_thread.html">Hilos (threads)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_monitoring.html">Sistema de monitoreo ambiental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_i2c.html">Control de pantalla OLED (I2C)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_comunication.html">Comunicación inalámbrica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_cores.html">Comunicación entre microcontrolador ESP32 y RP2040</a></li>
+<li class="toctree-l1"><a class="reference internal" href="report.html">Cómo Generar un Informe de Error</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/UNIT-Electronics/CH55x_SDCC_Doc" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/UNIT-Electronics/CH55x_SDCC_Doc/edit/main/docs/5_pwm.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/UNIT-Electronics/CH55x_SDCC_Doc/issues/new?title=Issue%20on%20page%20%2F5_pwm.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/5_pwm.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Control Servo (PWM)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">Objetivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion">Descripción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requisitos">Requisitos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrama-de-conexion">Diagrama de conexión</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#codigo-fuente-pwm-unitrp2040-pwm-py">Código Fuente: PWM (unitRP2040_pwm.py)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#codigo-fuente-servo-unitrp2040-servo-py">Código Fuente: Servo (unitRP2040_servo.py)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados">Resultados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="control-servo-pwm">
+<h1>Control Servo (PWM)<a class="headerlink" href="#control-servo-pwm" title="Link to this heading">#</a></h1>
+<section id="objetivo">
+<h2>Objetivo<a class="headerlink" href="#objetivo" title="Link to this heading">#</a></h2>
+<p>Utilizar la tarjeta DualMCU con el RP2040 para controlar un servo motor, logrando movimientos precisos a ángulos específicos. Esto incluye la capacidad de dirigir el servo en un rango definido o seguir una secuencia predefinida de movimientos.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>En esta práctica, se utilizará el <strong>RP2040</strong>.</p>
+</div>
+</section>
+<section id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Link to this heading">#</a></h2>
+<p>Esta sección proporciona recursos y código para el control de servomotores mediante MicroPython. Los servomotores, comunes en robótica y automatización, permiten gestionar la posición angular de un eje. Con MicroPython se dispone de una interfaz sencilla y eficiente para controlar los servomotores.</p>
+</section>
+<section id="requisitos">
+<h2>Requisitos<a class="headerlink" href="#requisitos" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>1x <a class="reference external" href="https://uelectronics.com/producto/unit-dualmcu-esp32-rp2040-tarjeta-de-desarrollo/">Placa UNIT DualMCU</a></p></li>
+<li><p>1x <a class="reference external" href="https://uelectronics.com/producto/servomotor-sg90-rc-9g/">Servomotor compatible</a></p></li>
+<li><p>1x <a class="reference external" href="https://uelectronics.com/producto/cables-dupont-largos-20cm-hh-mh-mm/">Cables Dupont: Hembra - Macho</a></p></li>
+</ul>
+</section>
+<section id="diagrama-de-conexion">
+<h2>Diagrama de conexión<a class="headerlink" href="#diagrama-de-conexion" title="Link to this heading">#</a></h2>
+<p>Conecta la UNIT DUALMCU al servomotor según el siguiente diagrama:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Diagrama.jpg"><img alt="Block Diagram" src="_images/Diagrama.jpg" style="width: 600px;" /></a>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Recuerda que en la DualMCU puedes intercambiar entre microcontroladores mediante un interruptor. Para esta práctica, usa el microcontrolador RP2040 cambiando el interruptor a la posición “A”.</p>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/selector.png"><img alt="Selector DualMCU" src="_images/selector.png" style="width: 600px;" /></a>
+</figure>
+<section id="codigo-fuente-pwm-unitrp2040-pwm-py">
+<h3>Código Fuente: PWM (unitRP2040_pwm.py)<a class="headerlink" href="#codigo-fuente-pwm-unitrp2040-pwm-py" title="Link to this heading">#</a></h3>
+<p>El siguiente código configura una salida para el servomotor en el GPIO 0:</p>
+<div style="text-align: right;">
+     <a href="/_static/5-Control_Servo/code/unitRP2040_pwm.py" download="unitRP2040_pwm.py">
+           <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                Download unitRP2040_pwm.py
+           </button>
+     </a>
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 2</span><span class="sd">Unit Electronics 2023</span>
+<span class="linenos"> 3</span><span class="sd">             (o_</span>
+<span class="linenos"> 4</span><span class="sd">    (o_    //\</span>
+<span class="linenos"> 5</span><span class="sd">    (/)_   V_/_</span>
+<span class="linenos"> 6</span><span class="sd">tested code mark</span>
+<span class="linenos"> 7</span><span class="sd">    version: 0.0.1</span>
+<span class="linenos"> 8</span><span class="sd">    revision: 0.0.1</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="sd">Código de prueba</span>
+<span class="linenos">11</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos">12</span><span class="kn">import</span> <span class="nn">machine</span>
+<span class="linenos">13</span><span class="kn">import</span> <span class="nn">utime</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="c1"># Configuración del pin PWM</span>
+<span class="linenos">16</span><span class="n">pwm_pin</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Cambia a machine.Pin(1) si usas GPIO 1</span>
+<span class="linenos">17</span><span class="n">pwm</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">PWM</span><span class="p">(</span><span class="n">pwm_pin</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="c1"># Frecuencia del PWM en Hz (ajusta según tus necesidades)</span>
+<span class="linenos">20</span><span class="n">pwm</span><span class="o">.</span><span class="n">freq</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="k">try</span><span class="p">:</span>
+<span class="linenos">23</span>     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">24</span>           <span class="c1"># Ciclo de trabajo del PWM (0-65535: 0 apagado, 65535 encendido)</span>
+<span class="linenos">25</span>           <span class="k">for</span> <span class="n">duty_cycle</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">65536</span><span class="p">,</span> <span class="mi">5000</span><span class="p">):</span>
+<span class="linenos">26</span>                <span class="n">pwm</span><span class="o">.</span><span class="n">duty_u16</span><span class="p">(</span><span class="n">duty_cycle</span><span class="p">)</span>
+<span class="linenos">27</span>                <span class="n">utime</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span>           <span class="c1"># Efecto de atenuación inversa</span>
+<span class="linenos">30</span>           <span class="k">for</span> <span class="n">duty_cycle</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">65535</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5000</span><span class="p">):</span>
+<span class="linenos">31</span>                <span class="n">pwm</span><span class="o">.</span><span class="n">duty_u16</span><span class="p">(</span><span class="n">duty_cycle</span><span class="p">)</span>
+<span class="linenos">32</span>                <span class="n">utime</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+<span class="linenos">35</span>     <span class="n">pwm</span><span class="o">.</span><span class="n">deinit</span><span class="p">()</span>
+<span class="linenos">36</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">PWM detenido. Recursos liberados.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/pwm_osc.gif"><img alt="figura-gif" src="_images/pwm_osc.gif" style="width: 60%;" /></a>
+</figure>
+</section>
+<section id="codigo-fuente-servo-unitrp2040-servo-py">
+<h3>Código Fuente: Servo (unitRP2040_servo.py)<a class="headerlink" href="#codigo-fuente-servo-unitrp2040-servo-py" title="Link to this heading">#</a></h3>
+<p>El siguiente ejemplo controla un servomotor utilizando PWM a 50 Hz:</p>
+<div style="text-align: right;">
+     <a href="/_static/5-Control_Servo/code/unitRP2040_servo.py" download="unitRP2040_servo.py">
+           <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                Download unitRP2040_servo.py
+           </button>
+     </a>
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">machine</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">utime</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># Configuración del pin de control del servomotor</span>
+<span class="linenos"> 5</span><span class="n">servo_pin</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Cambia según tu conexión</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># Crea un objeto PWM para el servomotor</span>
+<span class="linenos"> 8</span><span class="n">pwm_servo</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">PWM</span><span class="p">(</span><span class="n">servo_pin</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="n">pwm_servo</span><span class="o">.</span><span class="n">freq</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="c1"># Frecuencia para servomotores (~50 Hz)</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="k">def</span> <span class="nf">set_servo_angle</span><span class="p">(</span><span class="n">angle</span><span class="p">):</span>
+<span class="linenos">12</span>     <span class="c1"># Convierte el ángulo (0-180°) a un ciclo de trabajo</span>
+<span class="linenos">13</span>     <span class="n">duty_cycle</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1024</span> <span class="o">+</span> <span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">180</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3072</span><span class="p">)</span>
+<span class="linenos">14</span>     <span class="n">pwm_servo</span><span class="o">.</span><span class="n">duty_u16</span><span class="p">(</span><span class="n">duty_cycle</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="k">try</span><span class="p">:</span>
+<span class="linenos">17</span>     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">18</span>           <span class="c1"># Mueve el servomotor de 0 a 180°</span>
+<span class="linenos">19</span>           <span class="k">for</span> <span class="n">angle</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+<span class="linenos">20</span>                <span class="n">set_servo_angle</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+<span class="linenos">21</span>                <span class="n">utime</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span>           <span class="c1"># Mueve el servomotor de 180 a 0°</span>
+<span class="linenos">24</span>           <span class="k">for</span> <span class="n">angle</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">):</span>
+<span class="linenos">25</span>                <span class="n">set_servo_angle</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+<span class="linenos">26</span>                <span class="n">utime</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+<span class="linenos">29</span>     <span class="n">pwm_servo</span><span class="o">.</span><span class="n">deinit</span><span class="p">()</span>
+<span class="linenos">30</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">PWM detenido. Recursos liberados.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/pwm_servo.gif"><img alt="figura-gif" src="_images/pwm_servo.gif" style="width: 60%;" /></a>
+</figure>
+</section>
+<section id="resultados">
+<h3>Resultados<a class="headerlink" href="#resultados" title="Link to this heading">#</a></h3>
+<p>El código demuestra la capacidad del RP2040 para controlar un servomotor mediante PWM, utilizando el pin GPIO 0 (ajustable) a 50 Hz, la frecuencia recomendada para servos.</p>
+</section>
+<section id="conclusiones">
+<h3>Conclusiones<a class="headerlink" href="#conclusiones" title="Link to this heading">#</a></h3>
+<p>La práctica con la tarjeta DualMCU - RP2040 y un servomotor introduce conceptos clave en el control de hardware a través de microcontroladores. Se cubren la configuración de pines, la generación de PWM y la conversión de ángulos a valores de ciclo de trabajo, proporcionando una base para proyectos avanzados de robótica y automatización.</p>
+<p>Para profundizar en el control PWM, se sugiere experimentar con ejemplos del <a class="reference external" href="https://github.com/UNIT-Electronics/DualMCU/tree/main/Examples/Micropython%20Basics/RP2040/02.PWM">repositorio de la DualMCU</a>.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="4_adc.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Sensor de temperatura</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="6_alarm.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Sistema de alarma (INPUT)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">Objetivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion">Descripción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requisitos">Requisitos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrama-de-conexion">Diagrama de conexión</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#codigo-fuente-pwm-unitrp2040-pwm-py">Código Fuente: PWM (unitRP2040_pwm.py)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#codigo-fuente-servo-unitrp2040-servo-py">Código Fuente: Servo (unitRP2040_servo.py)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados">Resultados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Cesar Bautista
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Unit Electronics.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

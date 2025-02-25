@@ -1,0 +1,675 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sensor de temperatura &#8212; documentación de Cocket Nova Development Board Programming Guide C/C++ - 0.1.0</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=07f796b5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=47050f13"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '4_adc';</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Control Servo (PWM)" href="5_pwm.html" />
+    <link rel="prev" title="Led intermitente (OUTPUT)" href="3_ouputs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/Logo-UNIT_Web-04-800x182.png" class="logo__image only-light" alt="documentación de Cocket Nova Development Board Programming Guide C/C++ - 0.1.0 - Home"/>
+    <script>document.write(`<img src="_static/Logo-UNIT_Web-04-800x182.png" class="logo__image only-dark" alt="documentación de Cocket Nova Development Board Programming Guide C/C++ - 0.1.0 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_about.html">Introducción a la DUALMCU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_generalboardcontrol.html">Micropython y la DualMCU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_ouputs.html">Led intermitente (OUTPUT)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sensor de temperatura</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_pwm.html">Control Servo (PWM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_alarm.html">Sistema de alarma (INPUT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_control_motor.html">Control de motores DC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_thread.html">Hilos (threads)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_monitoring.html">Sistema de monitoreo ambiental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_i2c.html">Control de pantalla OLED (I2C)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_comunication.html">Comunicación inalámbrica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_cores.html">Comunicación entre microcontrolador ESP32 y RP2040</a></li>
+<li class="toctree-l1"><a class="reference internal" href="report.html">Cómo Generar un Informe de Error</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/UNIT-Electronics/CH55x_SDCC_Doc" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/UNIT-Electronics/CH55x_SDCC_Doc/edit/main/docs/4_adc.rst" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/UNIT-Electronics/CH55x_SDCC_Doc/issues/new?title=Issue%20on%20page%20%2F4_adc.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/4_adc.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sensor de temperatura</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">Objetivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion">Descripción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-del-adc">Descripción del ADC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#materiales">Materiales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrama-de-conexion">Diagrama de conexión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#codigo">Código</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados">Resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="sensor-de-temperatura">
+<h1>Sensor de temperatura<a class="headerlink" href="#sensor-de-temperatura" title="Link to this heading">#</a></h1>
+<section id="objetivo">
+<h2>Objetivo<a class="headerlink" href="#objetivo" title="Link to this heading">#</a></h2>
+<p>Obtener las lecturas de la temperatura actual mediante un sensor analógico LM35 y visualizar los resultados a través del monitor en serie del IDE de Thonny.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>En esta práctica, se utilizará el <strong>RP2040</strong>.</p>
+</div>
+</section>
+<section id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Link to this heading">#</a></h2>
+<p>En esta práctica, nos enfocaremos en la utilización del sensor analógico LM35 para la medición de la temperatura actual. El sensor LM35 ha sido seleccionado por su versatilidad y facilidad de integración con diversas placas de desarrollo. Es ideal para proyectos educativos y de electrónica al ser compatible con Arduino, Raspberry Pi, Nodemcu, ESP32, entre otros dispositivos con pines analógicos.</p>
+<p>Este enfoque permite familiarizarse con la lectura analógica y la visualización de resultados en el monitor serie del IDE de Thonny. El código de ejemplo funciona tanto en ESP32 como en RP2040 bajo MicroPython, haciendo la práctica versátil y adaptable a distintas plataformas.</p>
+</section>
+<section id="descripcion-del-adc">
+<h2>Descripción del ADC<a class="headerlink" href="#descripcion-del-adc" title="Link to this heading">#</a></h2>
+<p>La clase ADC sirve como interfaz para convertir una señal analógica a digital. Se encuentra en el módulo machine y se puede importar de la siguiente forma:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">ADC</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">adc</span> <span class="o">=</span> <span class="n">ADC</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span>        <span class="c1"># crea un objeto ADC para un pin</span>
+<span class="linenos">4</span><span class="n">val</span> <span class="o">=</span> <span class="n">adc</span><span class="o">.</span><span class="n">read_u16</span><span class="p">()</span>  <span class="c1"># lectura de 0 a 65535</span>
+<span class="linenos">5</span><span class="n">val</span> <span class="o">=</span> <span class="n">adc</span><span class="o">.</span><span class="n">read_uv</span><span class="p">()</span>   <span class="c1"># lectura en microvoltios</span>
+</pre></div>
+</div>
+<p>Para más información, consulta la <a class="reference external" href="https://docs.micropython.org/en/latest/library/machine.ADC.html">Documentación oficial de MicroPython</a>.</p>
+<p>Puedes ver un ejemplo en el <a class="reference external" href="https://github.com/UNIT-Electronics/DualMCU/blob/main/Examples/Micropython%20Basics/RP2040/01.ADC/ADC.py">repositorio de la DualMCU</a>.</p>
+</section>
+<section id="materiales">
+<h2>Materiales<a class="headerlink" href="#materiales" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://uelectronics.com/producto/unit-dualmcu-esp32-rp2040-tarjeta-de-desarrollo/">1x  Placa UNIT DualMCU</a></p></li>
+<li><p><a class="reference external" href="https://uelectronics.com/producto/lm35-sensor-de-temperatura/">1x  Sensor de temperatura LM35</a></p></li>
+<li><p><a class="reference external" href="https://uelectronics.com/producto/cables-dupont-largos-20cm-hh-mh-mm/">1x  Cables Dupont: Hembra - Macho</a></p></li>
+</ul>
+<p>Para el ESP32, adicionalmente necesitarás:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://uelectronics.com/producto/led-5mm-difuso-rojo-amarillo-verde-azul-blanco/">2x LEDs</a></p></li>
+<li><p><a class="reference external" href="https://uelectronics.com/producto/resistencia-1-4w-presicion/">2x Resistencias 220 ohms</a></p></li>
+</ul>
+</section>
+<section id="diagrama-de-conexion">
+<h2>Diagrama de conexión<a class="headerlink" href="#diagrama-de-conexion" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Recuerda que la DualMCU permite intercambiar entre microcontroladores mediante un interruptor.</p>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/selector.png"><img alt="Block Diagram" src="_images/selector.png" style="width: 600px;" /></a>
+</figure>
+<p>A continuación, se muestra el diagrama de conexión para el sensor LM35 con el microcontrolador RP2040:</p>
+<figure class="align-default">
+<img alt="Diagrama RP2040" src="_images/AR3578_Diagrama_RP2.jpg" />
+</figure>
+<p>Para el ESP32, utiliza el siguiente diagrama:</p>
+<figure class="align-default">
+<img alt="Diagrama ESP32" src="_images/AR3578_Diagrama_ESP2.jpg" />
+</figure>
+</section>
+<section id="codigo">
+<h2>Código<a class="headerlink" href="#codigo" title="Link to this heading">#</a></h2>
+<p>Estos ejemplos muestran cómo usar el LM35 en microcontroladores RP2040 y ESP32.</p>
+<div style="text-align: right;">
+     <a href="/_static/4-Sensor_de_temperatura/code/unitESP32_adc.py" download="unitRP2040_adc.py">
+          <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                Download unitRP2040_adc.py
+          </button>
+     </a>
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 2</span><span class="sd">Unit Electronics 2024</span>
+<span class="linenos"> 3</span><span class="sd">          (o_</span>
+<span class="linenos"> 4</span><span class="sd"> (o_    //\</span>
+<span class="linenos"> 5</span><span class="sd"> (/)_   V_/_</span>
+<span class="linenos"> 6</span><span class="sd"> tested code mark</span>
+<span class="linenos"> 7</span><span class="sd"> version: 0.0.1</span>
+<span class="linenos"> 8</span><span class="sd"> revision: 0.0.1</span>
+<span class="linenos"> 9</span><span class="sd"> RP2040</span>
+<span class="linenos">10</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos">11</span><span class="kn">import</span> <span class="nn">machine</span>
+<span class="linenos">12</span><span class="kn">import</span> <span class="nn">time</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="c1"># Configura el pin para leer el sensor LM35</span>
+<span class="linenos">15</span><span class="n">pin_lm35</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="o">.</span><span class="n">IN</span><span class="p">)</span>
+<span class="linenos">16</span><span class="n">adc</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">ADC</span><span class="p">(</span><span class="n">pin_lm35</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">19</span>    <span class="c1"># Lee el valor en milivoltios</span>
+<span class="linenos">20</span>    <span class="n">lm35_output_mv</span> <span class="o">=</span> <span class="n">adc</span><span class="o">.</span><span class="n">read_u16</span><span class="p">()</span> <span class="o">*</span> <span class="mf">3.3</span> <span class="o">/</span> <span class="mi">65535</span> <span class="o">*</span> <span class="mi">1000</span>
+<span class="linenos">21</span>    <span class="c1"># Convierte a grados Celsius</span>
+<span class="linenos">22</span>    <span class="n">temperatura_celsius</span> <span class="o">=</span> <span class="p">(</span><span class="n">lm35_output_mv</span> <span class="o">-</span> <span class="mi">500</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="linenos">23</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Temperatura: </span><span class="si">{:.2f}</span><span class="s2"> °C&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">temperatura_celsius</span><span class="p">))</span>
+<span class="linenos">24</span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div style="text-align: right;">
+     <a href="/_static/4-Sensor_de_temperatura/code/unitESP32_adc.py" download="unitESP32_adc.py">
+          <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                Download unitESP32_adc.py
+          </button>
+     </a>
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 2</span><span class="sd">Unit Electronics 2024</span>
+<span class="linenos"> 3</span><span class="sd">         (o_</span>
+<span class="linenos"> 4</span><span class="sd">(o_    //\</span>
+<span class="linenos"> 5</span><span class="sd">(/)_   V_/_</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="sd">version: 0.0.1</span>
+<span class="linenos"> 8</span><span class="sd">revision: 0.0.1</span>
+<span class="linenos"> 9</span><span class="sd">ESP32</span>
+<span class="linenos">10</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos">11</span><span class="kn">import</span> <span class="nn">machine</span>
+<span class="linenos">12</span><span class="kn">import</span> <span class="nn">time</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="c1"># Configura el ADC en el pin 36</span>
+<span class="linenos">15</span><span class="n">adc</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">ADC</span><span class="p">(</span><span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">36</span><span class="p">))</span>
+<span class="linenos">16</span><span class="n">adc</span><span class="o">.</span><span class="n">atten</span><span class="p">(</span><span class="n">machine</span><span class="o">.</span><span class="n">ADC</span><span class="o">.</span><span class="n">ATTN_11DB</span><span class="p">)</span>      <span class="c1"># Rango 0 a 3.3v</span>
+<span class="linenos">17</span><span class="n">adc</span><span class="o">.</span><span class="n">width</span><span class="p">(</span><span class="n">machine</span><span class="o">.</span><span class="n">ADC</span><span class="o">.</span><span class="n">WIDTH_12BIT</span><span class="p">)</span>     <span class="c1"># Rango 0 a 4095</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="c1"># Configura LEDs en los pines 2 y 25</span>
+<span class="linenos">20</span><span class="n">led</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>
+<span class="linenos">21</span><span class="n">led2</span> <span class="o">=</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">24</span>    <span class="n">valor</span> <span class="o">=</span> <span class="n">adc</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos">25</span>    <span class="nb">print</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
+<span class="linenos">26</span>    <span class="k">if</span> <span class="n">valor</span> <span class="o">&gt;</span> <span class="mi">2000</span><span class="p">:</span>
+<span class="linenos">27</span>         <span class="n">led</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">28</span>         <span class="n">led2</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">29</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">30</span>         <span class="n">led</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">31</span>         <span class="n">led2</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">32</span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="resultados">
+<h2>Resultados<a class="headerlink" href="#resultados" title="Link to this heading">#</a></h2>
+<p>En el monitor serie verás el valor de la temperatura en grados centígrados.</p>
+<figure class="align-default">
+<img alt="Sensor Reading" src="_images/sensor.png" />
+</figure>
+</section>
+<section id="conclusiones">
+<h2>Conclusiones<a class="headerlink" href="#conclusiones" title="Link to this heading">#</a></h2>
+<p>Esta práctica permite comprender la lectura de sensores analógicos y la configuración del ADC en microcontroladores. Además, demuestra cómo interactuar con dispositivos externos, como LEDs, para visualizar datos en tiempo real.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>El ejemplo de código puede requerir ajustes según tu configuración y necesidades.</p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3_ouputs.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Led intermitente (OUTPUT)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="5_pwm.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Control Servo (PWM)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">Objetivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion">Descripción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-del-adc">Descripción del ADC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#materiales">Materiales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrama-de-conexion">Diagrama de conexión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#codigo">Código</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados">Resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Cesar Bautista
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Unit Electronics.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
