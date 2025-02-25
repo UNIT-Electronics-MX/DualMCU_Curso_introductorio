@@ -221,8 +221,6 @@ Resultados
 Con unos breves resultados, el control de comunicación por JSON es una práctica que beneficia la comunicación en el aspecto de que los microcontroladores permiten su uso sin componentes de software externos, por lo que su implementación es práctica. Los resultados de esta comunicación permiten conocer las posibilidades de la DUALMCU.
 
 
-
-
 .. only:: html
 
     .. figure:: /_static/12-Comunicacion_esp32_rp2040/images/dual.gif
