@@ -1,7 +1,12 @@
 # Introdución  a Micropython (DualMCU)
 
-Proyecto princial `git`
-[Curso_introductorio_DualMCU](https://unit-electronics.github.io/DualMCU_Curso_introductorio/).
+Nueva version de la documentación de [DualMCU](https://unit-electronics-mx.github.io/DualMCU_Curso_introductorio/).
+
+## Descripción
+
+Migración de la documentación de [DualMCU](https://unit-electronics.github.io/DualMCU_Curso_introductorio/) a un nuevo formato.
+
+
 
 Documentación oficial [DualMCU](https://github.com/UNIT-Electronics/DualMCU).
 
@@ -21,6 +26,5 @@ La documentación esta basada en [Hugo](https://gohugo.io/).
 # Créditos
 
 
-+ Agradecemos a [kprasadvnsi](https://github.com/kprasadvnsi) por la plantilla y el método para la configuración de la página, tomando como referencia el proyecto [CH559_Doc_English](https://github.com/kprasadvnsi/CH559_Doc_English). 
 
 + [UNIT Electronics](https://uelectronics.com/) Visita el sitio web para descubrir más sobre los productos y servicios.
