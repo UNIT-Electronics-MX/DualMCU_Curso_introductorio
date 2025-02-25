@@ -102,7 +102,7 @@ Selecciona la tarjeta con la que deseas trabajar en la parte inferior de Thonny.
 Actualización de firmware RP2040
 -------------------------------
 
-Inicia la UNIT DualMCU con el microcontrolador RP2040 en **Posición B**, presionando el botón de `BOOT` y conectando el dispositivo a la PC.
+Inicia la UNIT DualMCU con el microcontrolador RP2040 en **Posición A**, presionando el botón de `BOOT` y conectando el dispositivo a la PC.
 
 
 .. figure:: /_static/2-Micropython/images/RP2040-Boot_button.jpg
