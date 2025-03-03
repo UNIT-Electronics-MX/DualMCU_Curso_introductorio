@@ -59,20 +59,17 @@ Diagrama de conexión
     :align: center
     :width: 600px
 
+
 A continuación, se muestra el diagrama de conexión para el sensor LM35 con el microcontrolador RP2040:
+
+
+RP2040 | LM35 ejemplo de código
+-------------------------------
+
 
 .. figure:: /_static/4-Sensor_de_temperatura/images/AR3578_Diagrama_RP2.jpg
     :alt: Diagrama RP2040
 
-Para el ESP32, utiliza el siguiente diagrama:
-
-.. figure:: /_static/4-Sensor_de_temperatura/images/AR3578_Diagrama_ESP2.jpg
-    :alt: Diagrama ESP32
-
-Código
-------
-
-Estos ejemplos muestran cómo usar el LM35 en microcontroladores RP2040 y ESP32.
 
 .. raw:: html
 
@@ -112,6 +109,16 @@ Estos ejemplos muestran cómo usar el LM35 en microcontroladores RP2040 y ESP32.
         print("Temperatura: {:.2f} °C".format(temperatura_celsius))
         time.sleep(1)
 
+
+
+ESP32 | LM35 ejemplo de código
+-------------------------------
+
+
+.. figure:: /_static/4-Sensor_de_temperatura/images/AR3578_Diagrama_ESP2.jpg
+    :alt: Diagrama ESP32
+
+
 .. raw:: html
 
     <div style="text-align: right;">
@@ -121,6 +128,7 @@ Estos ejemplos muestran cómo usar el LM35 en microcontroladores RP2040 y ESP32.
               </button>
          </a>
     </div>
+
 
 .. code-block:: python
     :linenos:
