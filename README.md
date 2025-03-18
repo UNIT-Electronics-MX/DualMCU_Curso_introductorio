@@ -1,6 +1,6 @@
 # Introdución  a Micropython (DualMCU)
 
-Nueva version de la documentación de [DualMCU](https://unit-electronics-mx.github.io/DualMCU_Curso_introductorio/).
+Nueva version de la documentación de [DualMCU](https://unit-electronics-mx.github.io/dualmcu_curso_introductorio/index.html).
 
 ## Descripción
 
